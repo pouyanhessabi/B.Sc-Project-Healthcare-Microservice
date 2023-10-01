@@ -1,0 +1,19 @@
+version: '3'
+services:
+  auth:
+    build:
+      context: .
+    command: python services/auth/disease_detection.py 0.0.0.0:5000
+    volumes:
+      - .:/code
+    ports:
+      - "5000:5000"
+
+  ai:
+    build:
+      context: .
+    command: python services/ai/disease_detection.py 0.0.0.0:5001
+    volumes:
+      - .:/code
+    ports:
+      - "5001:5001"
