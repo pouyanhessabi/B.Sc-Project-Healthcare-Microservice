@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detection by symptoms</title>
+    <style>
+        /* General styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+
+        /* Sidebar styles */
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 250px;
+            height: 100%;
+            background-color: #333;
+            color: white;
+            overflow-y: auto;
+            transition: left 0.3s;
+        }
+
+        .sidebar.open {
+            left: 0;
+        }
+
+        .sidebar-header {
+            padding: 15px;
+            background-color: #222;
+        }
+
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .sidebar li {
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        .sidebar li:hover {
+            background-color: #444;
+        }
+
+        /* Content styles */
+        #content {
+            margin-left: 250px;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        /* Checkbox styles */
+        .checkbox-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 5px;
+        }
+
+        .checkbox-label {
+            flex: 1;
+            margin-left: 10px;
+        }
+
+        /* Submit button styles */
+        #submitBtn {
+            background-color: #333;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        #submitBtn:hover {
+            background-color: #555;
+        }
+
+        /* Selected items box styles */
+        #selectedItemsBox {
+            background-color: #fff;
+            padding: 20px;
+            margin-top: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Selected items list styles */
+        #selectedItemsList {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        #selectedItemsList li {
+            padding: 5px;
+            background-color: #f0f0f0;
+            border: 1px solid #ddd;
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+<!-- Sidebar -->
+<form action="/submit" method="POST">
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <h2>Items</h2>
+        </div>
+        <ul>
+            {% for item in items %}
+            <li>
+                <label>
+                    <input type="checkbox" name="item[]" value="{{ item }}"> {{ item }}
+                </label>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div id="content">
+        <h1>Symptoms</h1>
+        <ul id="selectedItemsBox">
+            <h2>Selected Items:</h2>
+            <ul id="selectedItemsList"></ul>
+        </ul>
+        <button type="submit" id="submitBtn">Submit Selected Items</button>
+    </div>
+</form>
+<!-- Content -->
+
+
+<script>
+    const sidebar = document.querySelector('.sidebar');
+    const toggleButton = document.getElementById('toggleSidebar');
+    const submitButton = document.getElementById('submitBtn');
+    const selectedItemsList = document.getElementById('selectedItemsList');
+    const checkboxes = document.querySelectorAll('.sidebar input[type="checkbox"]');
+
+    checkboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', () => {
+            updateSelectedItems();
+        });
+    });
+
+    submitButton.addEventListener('click', () => {
+        const selectedItems = [];
+        checkboxes.forEach(checkbox => {
+            if (checkbox.checked) {
+                selectedItems.push(checkbox.value);
+            }
+        });
+        // Here, you can send 'selectedItems' to the backend using AJAX or form submission.
+        console.log('Selected items:', selectedItems);
+    });
+
+    function updateSelectedItems() {
+        selectedItemsList.innerHTML = '';
+        checkboxes.forEach(checkbox => {
+            if (checkbox.checked) {
+                const listItem = document.createElement('li');
+                listItem.textContent = checkbox.value;
+                selectedItemsList.appendChild(listItem);
+            }
+        });
+    }
+</script>
+</body>
+</html>

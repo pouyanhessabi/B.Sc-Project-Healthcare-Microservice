@@ -98,19 +98,19 @@ class DiseaseDetection:
         pickle.dump(self.diseases_encoder, open(os.path.join(savepath, 'diseases.dict'), 'wb'))
         pickle.dump(self.diseases_list, open(os.path.join(savepath, 'diseases.list'), 'wb'))
 
-    def load_model(self, loadpath=None):
-        if loadpath is None:
+    def load_model(self, load_path=None):
+        if load_path is None:
             current_path = os.getcwd()
             models_path = os.path.join(current_path, 'models')
             if not os.path.exists(models_path):
                 os.mkdir(models_path)
-            loadpath = models_path
+            load_path = models_path
         self.model = xgb.XGBClassifier()
-        self.model.load_model(os.path.join(loadpath, 'classifier.xgb'))
-        self.symptoms_encoder = pickle.load(open(os.path.join(loadpath, 'symptoms.dict'), 'rb'))
-        self.symptoms_list = pickle.load(open(os.path.join(loadpath, 'symptoms.list'), 'rb'))
-        self.diseases_encoder = pickle.load(open(os.path.join(loadpath, 'diseases.dict'), 'rb'))
-        self.diseases_list = pickle.load(open(os.path.join(loadpath, 'diseases.list'), 'rb'))
+        self.model.load_model(os.path.join(load_path, 'classifier.xgb'))
+        self.symptoms_encoder = pickle.load(open(os.path.join(load_path, 'symptoms.dict'), 'rb'))
+        self.symptoms_list = pickle.load(open(os.path.join(load_path, 'symptoms.list'), 'rb'))
+        self.diseases_encoder = pickle.load(open(os.path.join(load_path, 'diseases.dict'), 'rb'))
+        self.diseases_list = pickle.load(open(os.path.join(load_path, 'diseases.list'), 'rb'))
 
     @staticmethod
     def cleaner(word):
@@ -129,7 +129,7 @@ def detect_disease(symptoms: list):
     disease_detection = DiseaseDetection()
     # disease_detection.train('./data/dataset.csv')
     # disease_detection.save_model()
-    disease_detection.load_model()
+    disease_detection.load_model("services\\ai\\models\\")
     return disease_detection.predict(symptoms, min_matching_ratio=0)
     # EXAMPLE:
     # symptoms_list = ['Cough', 'chest pain', 'breath issues', 'anxiety', 'throat pain', 'mucoid_putum']

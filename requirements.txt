@@ -3,5 +3,12 @@ pandas~=2.1.1
 numpy~=1.26.0
 openpyxl~=3.0.10
 Levenshtein~=0.21.1
-flask
+flask~=3.0.0
 flask-sqlalchemy
+pip~=23.2.1
+cryptography~=41.0.4
+Jinja2~=3.1.2
+setuptools~=65.5.0
+SQLAlchemy~=2.0.21
+mysql~=0.0.3
+mysql-connector-python~=8.1.0
