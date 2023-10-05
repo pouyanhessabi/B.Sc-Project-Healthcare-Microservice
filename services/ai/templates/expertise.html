@@ -66,13 +66,15 @@
         <p>Probable Diseases:</p>
         <p>{{ diseases }}</p>
     </div>
-    <div class="box" id="right-box">
-        <p>Probable Expertise:</p>
-        <p>{{ expertises }}</p>
-        <div id="button-container">
-            <button id="click-button">Search</button>
+    <form action="/search" method="POST">
+        <div class="box" id="right-box">
+            <p>Probable Expertise:</p>
+            <p>{{ expertises }}</p>
+            <div id="button-container">
+                <button type="submit" id="submitBtn">Submit Selected Items</button>
+            </div>
         </div>
-    </div>
+    </form>
 </div>
 </body>
 </html>

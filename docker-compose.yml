@@ -3,7 +3,7 @@ services:
   auth:
     build:
       context: .
-    command: python services/auth/disease_detection.py 0.0.0.0:5000
+    command: python services/auth/ai_process.py 0.0.0.0:5000
     volumes:
       - .:/code
     ports:
@@ -12,7 +12,7 @@ services:
   ai:
     build:
       context: .
-    command: python services/ai/disease_detection.py 0.0.0.0:5001
+    command: python services/ai/ai_process.py 0.0.0.0:5001
     volumes:
       - .:/code
     ports:
