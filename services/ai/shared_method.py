@@ -17,3 +17,16 @@ def create_dictionary_from_formatted_ui_list(formatted_list):
         value = float(value_str.strip())  # Convert the value to an integer (or float if needed)
         reverted_dict[key] = value
     return reverted_dict
+
+
+def create_formatted_list_from_dictionary_to_ui(dictionary):
+    return [f'{key}: {value}' for key, value in dictionary.items()]
+
+
+def separate_value_before_colon(string):
+    colon_index = string.find(":")
+    if colon_index != -1:
+        result = string[:colon_index].strip()
+    else:
+        result = string  # Handle the case where no colon is found
+    return result

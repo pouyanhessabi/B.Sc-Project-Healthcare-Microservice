@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expertise</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -61,20 +62,26 @@
     </style>
 </head>
 <body>
-<div class="container">
-    <div class="box" id="left-box">
-        <p>Probable Diseases:</p>
-        <p>{{ diseases }}</p>
-    </div>
-    <form action="/search" method="POST">
-        <div class="box" id="right-box">
-            <p>Probable Expertise:</p>
-            <p>{{ expertises }}</p>
-            <div id="button-container">
-                <button type="submit" id="submitBtn">Submit Selected Items</button>
-            </div>
+<form action="/search" method="POST">
+    <div class="container">
+        <div class="box" id="left-box">
+            <ul>
+                {% for expertise in expertises %}
+                <li>
+                    <label>
+                        <input type="radio" name="expertise" value="{{ expertise }}"> {{ expertise }}
+                    </label>
+                </li>
+                {% endfor %}
+            </ul>
         </div>
-    </form>
-</div>
+
+        <div class="box" id="right-box">
+            <p>Search Expertise?</p>
+        </div>
+        <button type="submit" id="submitBtn">yes</button>
+
+    </div>
+</form>
 </body>
 </html>
