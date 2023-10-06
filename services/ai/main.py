@@ -5,11 +5,11 @@ import mysql.connector
 from flask import Flask, render_template, request, session
 from flask_sqlalchemy import SQLAlchemy
 
-from services.ai.disease_detection import detect_disease_from_symptom
+from services.ai.disease_detection import model_init, detect_disease_from_symptom
 from services.ai.mapper import mapper_method
+from services.ai.model import UserDisease, UserExpertise
 from services.ai.shared_method import create_dictionary_from_formatted_ui_list, \
     create_formatted_list_from_dictionary_to_ui, separate_value_before_colon
-from services.auth.model import UserDisease, UserExpertise
 from services.search.main import search_clinic
 
 app = Flask(__name__)
@@ -24,6 +24,8 @@ mysql_db = mysql.connector.connect(
     database='healthcare'
 )
 
+ai_model = model_init(load_model=True)
+
 
 @app.route('/')
 def index():
@@ -34,7 +36,7 @@ def index():
 @app.route('/disease', methods=['POST'])
 def disease_detection():
     symptoms = request.form.getlist('item[]')
-    diseases = detect_disease_from_symptom(symptoms)
+    diseases = detect_disease_from_symptom(ai_model, symptoms)
     save_to_db_user_disease(diseases)
     formatted_list = create_formatted_list_from_dictionary_to_ui(diseases)
     return render_template('disease.html', diseases=formatted_list)
@@ -74,7 +76,7 @@ def get_user_id():
 def save_to_db_user_disease(diseases: dict):
     user_id = get_user_id()
     for disease in diseases:
-        user_dis = UserDisease(user_id=user_id, disease=disease, rate=float(diseases[disease]), req_date=date.today())
+        user_dis = UserDisease(user_id=user_id, disease=disease, ratio=float(diseases[disease]), req_date=date.today())
         if is_new_user_disease(user_id, disease):
             db.session.add(user_dis)
     db.session.commit()
@@ -94,7 +96,7 @@ def is_new_user_disease(user_id, disease):
 def save_to_db_user_expertise(expertises: dict):
     user_id = get_user_id()
     for expertise in expertises:
-        user_expertise = UserExpertise(user_id=user_id, expertise=expertise, rate=float(expertises[expertise]),
+        user_expertise = UserExpertise(user_id=user_id, expertise=expertise, ratio=float(expertises[expertise]),
                                        req_date=date.today())
         if is_new_user_expertise(user_id, expertise):
             db.session.add(user_expertise)
