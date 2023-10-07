@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctors</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            /*height: 80vh;*/
+            margin: 0;
+            font-size: 20px; /* Adjust the font size as needed */
+        }
+
+
+        .object-box {
+            border: 10px solid #ccc;
+            padding: 20px;
+            margin: 50px;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .field {
+            font-weight: bold;
+        }
+
+
+        .top_nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            overflow: hidden;
+            background-color: #00C1AA;
+        }
+
+        .top_nav a {
+            float: right;
+            color: black;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            font-size: 15px;
+        }
+
+        .top_nav a:hover {
+            background-color: rgba(61, 61, 61, 0.38);
+            /*color: black;*/
+        }
+
+        .button-container {
+            margin-top: 50px; /* Adjust the distance between the navbar and buttons */
+            justify-content: space-between;
+            align-items: center;
+
+        }
+
+        .button-container button {
+            margin-right: 20px; /* Adjust the spacing between buttons */
+            display: inline-block;
+        }
+
+    </style>
+</head>
+<body>
+<div class="top_nav">
+    <a href="http://localhost:5000">Home</a>
+    <a href="http://localhost:5001">Disease</a>
+    <a href="http://localhost:5002">Search Doctor</a>
+
+</div>
+<form action="/search" method="POST">
+    <div class="button-container">
+        {% for expertise_item in expertises %}
+        <button type="submit" name="expertise" value="{{ expertise_item }}"> {{ expertise_item }}</button>
+        {% endfor %}
+    </div>
+</form>
+</body>
+</html>

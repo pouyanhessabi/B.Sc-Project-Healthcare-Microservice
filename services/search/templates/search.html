@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctors</title>
+    <style>
+        body {
+            display: flex;
+            background-color: #f0f0f0;
+            flex-direction: column;
+            align-items: center;
+            margin: 0;
+            font-size: 15px; /* Adjust the font size as needed */
+        }
+
+
+        .object-box {
+            border: 10px solid #00C1AA;;
+            padding: 50px;
+            margin: 10px;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .field {
+            font-weight: bold;
+        }
+
+
+        .top_nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            overflow: hidden;
+            background-color: #00C1AA;
+        }
+
+        .top_nav a {
+            float: right;
+            color: black;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            font-size: 15px;
+        }
+
+        .top_nav a:hover {
+            background-color: rgba(61, 61, 61, 0.38);
+            /*color: black;*/
+        }
+
+        .box {
+            padding: 70px;
+            margin: 10px;
+            border-radius: 5px;
+            background-color: #f0f0f0;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            font-weight: bold;
+            font-size: 30px;
+        }
+
+    </style>
+</head>
+<body>
+<div class="top_nav">
+    <a href="http://localhost:5000">Home</a>
+    <a href="http://localhost:5001">Disease</a>
+    <a href="http://localhost:5002">Search Doctor</a>
+
+</div>
+
+{{expertise}}
+<div class="box">
+    <label>
+        {{ expertise }}
+    </label>
+</div>
+<!--</header>-->
+{% for doctor in doctors %}
+<div class="object-box">
+    <!--    <div class="field">ID:</div>-->
+    <!--    <div>{{ doctor.id }}</div>-->
+    <div class="field">email:</div>
+    <div>{{ doctor.email }}</div>
+    <!--    <div class="field">password:</div>-->
+    <!--    <div>{{ doctor.password }}</div>-->
+    <div class="field">name:</div>
+    <div>{{ doctor.name }}</div>
+    <div class="field">code:</div>
+    <div>{{ doctor.code }}</div>
+    <div class="field">rate:</div>
+    <div>{{ doctor.rate }}</div>
+    <div class="field">expertises:</div>
+    <div>{{ doctor.expertises }}</div>
+    <div class="field">clinic:</div>
+    <div>{{ doctor.clinic }}</div>
+
+</div>
+{% endfor %}
+</body>
+</html>
