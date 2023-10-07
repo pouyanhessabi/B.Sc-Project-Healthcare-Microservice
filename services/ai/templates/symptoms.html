@@ -87,7 +87,7 @@
 
         /* Selected items box styles */
         #selectedItemsBox {
-            background-color: #fff;
+            background-color: #00C1AA;
             padding: 20px;
             margin-top: 20px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -105,10 +105,33 @@
             border: 1px solid #ddd;
             margin-bottom: 5px;
         }
+
+        .top_nav {
+            overflow: hidden;
+            background-color: #00C1AA;
+        }
+
+        .top_nav a {
+            float: right;
+            color: black;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            font-size: 15px;
+        }
+
+        .top_nav a:hover {
+            background-color: rgba(61, 61, 61, 0.38);
+            /*color: black;*/
+        }
     </style>
 </head>
 <body>
 <!-- Sidebar -->
+<div class="top_nav">
+    <a href="http://localhost:5000">Home</a>
+    <a href="http://localhost:5001">Disease</a>
+</div>
 <form action="/disease" method="POST">
     <div class="sidebar">
         <div class="sidebar-header">

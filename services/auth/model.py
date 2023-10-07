@@ -18,10 +18,10 @@ class User(UserMixin, db.Model):
 class Doctor(UserMixin, db.Model):
     __tablename__ = "doctor"
     id = db.Column(db.Integer, primary_key=True)
-    email = db.Column(db.String(100), unique=True)
-    password = db.Column(db.String(100), nullable=False)
+    email = db.Column(db.String(100), nullable=False, unique=True)
+    password = db.Column(db.String(100))
     name = db.Column(db.String(1000))
-    code = db.Column(db.Integer)
-    rate = db.Column(db.Integer)
+    code = db.Column(db.String(100))
+    rate = db.Column(db.Float)
     expertises = db.Column(db.String(100), nullable=False)
-    clinic_id = db.Column(db.Integer, db.ForeignKey('clinic.id'))
+    clinic = db.Column(db.String(100))

@@ -7,8 +7,13 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Flask Auth Example</title>
+    <title>Healthcare System</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css"/>
+    <style>
+        div {
+            color: black;
+        }
+    </style>
 </head>
 
 <body>
@@ -20,6 +25,12 @@
 
                 <div id="navbarMenuHeroA" class="navbar-menu">
                     <div class="navbar-end">
+                        <a href="http://localhost:5002" class="navbar-item">
+                            Search Doctor
+                        </a>
+                        <a href="http://localhost:5001" class="navbar-item">
+                            Disease
+                        </a>
                         <a href="{{ url_for('main.index') }}" class="navbar-item">
                             Home
                         </a>
