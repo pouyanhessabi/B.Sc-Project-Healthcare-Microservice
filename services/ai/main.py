@@ -2,6 +2,7 @@ import os
 from datetime import date
 
 import mysql.connector
+import requests
 from flask import Flask, render_template, request, session
 from flask_sqlalchemy import SQLAlchemy
 
@@ -9,8 +10,7 @@ from services.ai.disease_detection import model_init, detect_disease_from_sympto
 from services.ai.mapper import mapper_method
 from services.ai.model import UserDisease, UserExpertise
 from services.ai.shared_method import create_dictionary_from_formatted_ui_list, \
-    create_formatted_list_from_dictionary_to_ui, separate_value_before_colon
-from services.search.main import search_clinic
+    create_formatted_list_from_dictionary_to_ui
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '9OLWxND4o83j4K4iuopO'
@@ -55,8 +55,9 @@ def map_to_expertise():
 def search():
     expertise = request.form.get('expertise')
     print("expertise to search:", expertise)
-    expertise_name = separate_value_before_colon(expertise)
-    return search_clinic(expertise_name)
+    req_url = f'http://localhost:5002/search_doctors_another_service'
+    response = requests.post(req_url, json={expertise: " "})
+    return response.text
 
 
 def read_symptoms():
@@ -75,9 +76,12 @@ def get_user_id():
 
 def save_to_db_user_disease(diseases: dict):
     user_id = get_user_id()
+    if user_id is None:
+        user_id = 0
     for disease in diseases:
-        user_dis = UserDisease(user_id=user_id, disease=disease, ratio=float(diseases[disease]), req_date=date.today())
         if is_new_user_disease(user_id, disease):
+            user_dis = UserDisease(user_id=user_id, disease=disease, ratio=float(diseases[disease]),
+                                   req_date=date.today())
             db.session.add(user_dis)
     db.session.commit()
 
@@ -95,10 +99,12 @@ def is_new_user_disease(user_id, disease):
 
 def save_to_db_user_expertise(expertises: dict):
     user_id = get_user_id()
+    if user_id is None:
+        user_id = 0
     for expertise in expertises:
-        user_expertise = UserExpertise(user_id=user_id, expertise=expertise, ratio=float(expertises[expertise]),
-                                       req_date=date.today())
         if is_new_user_expertise(user_id, expertise):
+            user_expertise = UserExpertise(user_id=user_id, expertise=expertise, ratio=float(expertises[expertise]),
+                                           req_date=date.today())
             db.session.add(user_expertise)
     db.session.commit()
 

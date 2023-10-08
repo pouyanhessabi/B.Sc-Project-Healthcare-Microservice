@@ -72,7 +72,7 @@
     <a href="http://localhost:5002">Search Doctor</a>
 
 </div>
-<form action="/search" method="POST">
+<form action="/search_doctors_web" method="POST">
     <div class="button-container">
         {% for expertise_item in expertises %}
         <button type="submit" name="expertise" value="{{ expertise_item }}"> {{ expertise_item }}</button>

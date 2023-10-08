@@ -12,3 +12,4 @@ setuptools~=65.5.0
 SQLAlchemy~=2.0.21
 mysql~=0.0.3
 mysql-connector-python~=8.1.0
+requests~=2.31.0

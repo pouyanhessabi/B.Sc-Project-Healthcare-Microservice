@@ -10,12 +10,6 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://root:''@localhos
 db = SQLAlchemy(app)
 db.init_app(app)
 
-mysql_db = mysql.connector.connect(
-    host='localhost',
-    user='root',
-    database='healthcare'
-)
-
 
 @app.route('/')
 def index():
@@ -23,9 +17,20 @@ def index():
     return render_template('default.html', expertises=expertises)
 
 
-@app.route('/search', methods=['GET', 'POST'])
-def search():
+@app.route('/search_doctors_web', methods=['POST'])
+def search_web():
     expertise = request.form.get('expertise')
+    return search(expertise)
+
+
+@app.route('/search_doctors_another_service', methods=['POST'])
+def search_another_service():
+    dict_expertise = request.get_json(force=True)
+    expertise = separate_value_before_colon(list(dict_expertise.keys())[0])
+    return search(expertise)
+
+
+def search(expertise: str):
     doctors_tuple = load_doctors_by_expertise(expertise)
     doctors = create_doctors_list(doctors_tuple)
     print('expertise search', expertise)
@@ -34,6 +39,11 @@ def search():
 
 
 def load_doctors_by_expertise(expertise: str):
+    mysql_db = mysql.connector.connect(
+        host='localhost',
+        user='root',
+        database='healthcare'
+    )
     my_cursor = mysql_db.cursor()
     where_data = (expertise,)
     my_cursor.execute('select * from doctor where expertises = %s order by rate DESC', where_data)
@@ -66,3 +76,12 @@ def read_expertises():
         for line in file:
             items.append(line.strip())
     return items
+
+
+def separate_value_before_colon(string):
+    colon_index = string.find(":")
+    if colon_index != -1:
+        result = string[:colon_index].strip()
+    else:
+        result = string  # Handle the case where no colon is found
+    return result
