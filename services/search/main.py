@@ -1,5 +1,3 @@
-import os
-
 import mysql.connector
 from flask import Flask, render_template, request
 from flask_sqlalchemy import SQLAlchemy
@@ -9,11 +7,16 @@ app.config['SECRET_KEY'] = 'new9OLWxND4o83j4K4iuopO'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://root:''@localhost/healthcare'
 db = SQLAlchemy(app)
 db.init_app(app)
+mysql_db = mysql.connector.connect(
+    host='localhost',
+    user='root',
+    database='healthcare'
+)
 
 
 @app.route('/')
 def index():
-    expertises = read_expertises()
+    expertises = read_expertise_from_db()
     return render_template('default.html', expertises=expertises)
 
 
@@ -39,11 +42,6 @@ def search(expertise: str):
 
 
 def load_doctors_by_expertise(expertise: str):
-    mysql_db = mysql.connector.connect(
-        host='localhost',
-        user='root',
-        database='healthcare'
-    )
     my_cursor = mysql_db.cursor()
     where_data = (expertise,)
     my_cursor.execute('select * from doctor where expertises = %s order by rate DESC', where_data)
@@ -68,14 +66,11 @@ def create_doctors_list(doctors: list):
     return doctors_list
 
 
-def read_expertises():
-    items = []
-    current_dir = os.path.dirname(os.path.abspath(__file__))
-    file_path = os.path.join(current_dir, 'expertises.txt')
-    with open(file_path, 'r') as file:
-        for line in file:
-            items.append(line.strip())
-    return items
+def read_expertise_from_db():
+    my_cursor = mysql_db.cursor()
+    my_cursor.execute("SELECT name FROM expertise")
+    expertise = [row[0].strip() for row in my_cursor.fetchall()]
+    return expertise
 
 
 def separate_value_before_colon(string):

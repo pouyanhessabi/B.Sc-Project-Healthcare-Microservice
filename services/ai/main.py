@@ -1,4 +1,3 @@
-import os
 from datetime import date
 
 import mysql.connector
@@ -29,8 +28,8 @@ ai_model = model_init(load_model=True)
 
 @app.route('/')
 def index():
-    items = read_symptoms()
-    return render_template('symptoms.html', items=items)
+    symptoms = read_symptoms_from_db()
+    return render_template('symptoms.html', items=symptoms)
 
 
 @app.route('/disease', methods=['POST'])
@@ -60,14 +59,11 @@ def search():
     return response.text
 
 
-def read_symptoms():
-    items = []
-    current_dir = os.path.dirname(os.path.abspath(__file__))
-    file_path = os.path.join(current_dir, 'data\\symptoms.txt')
-    with open(file_path, 'r') as file:
-        for line in file:
-            items.append(line.strip())
-    return items
+def read_symptoms_from_db():
+    my_cursor = mysql_db.cursor()
+    my_cursor.execute("SELECT name FROM symptom")
+    symptoms = [row[0].strip() for row in my_cursor.fetchall()]
+    return symptoms
 
 
 def get_user_id():
