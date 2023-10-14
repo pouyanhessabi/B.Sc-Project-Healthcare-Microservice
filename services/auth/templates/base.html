@@ -29,7 +29,7 @@
                             Search Doctor
                         </a>
                         <a href="http://localhost:5001" class="navbar-item">
-                            Disease
+                            Disease Detection
                         </a>
                         <a href="{{ url_for('main.index') }}" class="navbar-item">
                             Home
@@ -52,6 +52,9 @@
                             Logout
                         </a>
                         {% endif %}
+                        <a href="{{ url_for('main.about') }}" class="navbar-item">
+                            About us
+                        </a>
                     </div>
                 </div>
             </div>
