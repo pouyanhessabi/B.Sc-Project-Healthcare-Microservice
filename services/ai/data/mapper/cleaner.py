@@ -1,3 +1,4 @@
+import numpy as np
 import openpyxl
 import pandas as pd
 
@@ -72,6 +73,49 @@ def average_result():
     average_df.to_excel('average_result.xlsx', engine='openpyxl')
 
 
+def calculate_standard_deviation():
+    # data1 = {
+    #     'A': [1.0, 2.0, 3.0],
+    #     'B': [4.0, 5.0, 6.0],
+    #     'C': [7.0, 8.0, 9.0]
+    # }
+    # data2 = {
+    #     'A': [2.0, 3.0, 4.0],
+    #     'B': [5.0, 6.0, 7.0],
+    #     'C': [8.0, 9.0, 10.0]
+    # }
+    # data3 = {
+    #     'A': [6.0, 4.0, 5.0],
+    #     'B': [6.0, 7.0, 8.0],
+    #     'C': [9.0, 10.0, 11.0]
+    # }
+    # df1 = pd.DataFrame(data1)
+    # df2 = pd.DataFrame(data2)
+    # df3 = pd.DataFrame(data3)
+
+    file_paths = ['output Alireza.xlsx', 'output leila.xlsx', 'output Reyhan.xlsx']
+    df1 = pd.read_excel(file_paths[0], skiprows=0, index_col=0)
+    df2 = pd.read_excel(file_paths[1], skiprows=0, index_col=0)
+    df3 = pd.read_excel(file_paths[2], skiprows=0, index_col=0)
+
+    # Calculate the mean of the three DataFrames
+    mean_df = (df1 + df2 + df3) / 3
+
+    # Calculate the squared differences for each DataFrame
+    squared_diff1 = (df1 - mean_df) ** 2
+    squared_diff2 = (df2 - mean_df) ** 2
+    squared_diff3 = (df3 - mean_df) ** 2
+
+    # Sum the squared differences
+    sum_squared_diff = squared_diff1 + squared_diff2 + squared_diff3
+
+    # Calculate the standard deviation
+    std_dev_df = np.sqrt(sum_squared_diff / 3)
+    std_dev_df.to_excel('std_dev.xlsx', engine='openpyxl')
+    # Output DataFrame (std_dev_df) will have the same dimensions as df1, df2, and df3
+    print(std_dev_df)
+
+
 if __name__ == "__main__":
     """ 
     normalized each file
@@ -83,4 +127,8 @@ if __name__ == "__main__":
 
     """
     average_result()
+    """
+
+    """
+    calculate_standard_deviation()
     """
