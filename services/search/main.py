@@ -50,10 +50,10 @@ def load_doctors_by_expertise(expertise: str):
 
 
 def doctor_tuple_to_dictionary(doctor: tuple):
-    id_, email, password, name, code, rate, expertises, clinic = doctor
+    id_, email, password, name, code, rate, expertises, clinic, image_src = doctor
     doctor_dictionary = {
         'id': id_, 'email': email, 'password': password, 'name': name, 'code': code, 'rate': rate,
-        'expertises': expertises, 'clinic': clinic
+        'expertises': expertises, 'clinic': clinic, "image_src": image_src
     }
 
     return doctor_dictionary

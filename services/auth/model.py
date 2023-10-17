@@ -25,3 +25,4 @@ class Doctor(UserMixin, db.Model):
     rate = db.Column(db.Float)
     expertises = db.Column(db.String(100), nullable=False)
     clinic = db.Column(db.String(100))
+    image_src = db.Column(db.String(100))

@@ -16,7 +16,7 @@
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
-            max-width: 800px;
+            max-width: 1500px;
             margin: 20px auto;
             background-color: #fff;
             border-radius: 10px;
@@ -34,15 +34,6 @@
 
         #left-box {
             background-color: #f5f5f5;
-        }
-
-        #right-box {
-            background-color: #f9f9f9;
-        }
-
-        #button-container {
-            text-align: center;
-            margin-top: 20px;
         }
 
         button {
@@ -78,6 +69,10 @@
             background-color: rgba(61, 61, 61, 0.38);
             /*color: black;*/
         }
+
+        ul {
+            list-style-type: none;
+        }
     </style>
 </head>
 <body>
@@ -92,18 +87,16 @@
             <ul>
                 {% for expertise in expertises %}
                 <li>
-                    <label>
-                        <input type="radio" name="expertise" value="{{ expertise }}"> {{ expertise }}
+                    <label style="font-size: 20px">
+                        <input type="radio" name="expertise" value="{{ expertise }}" style="margin: 15px"> {{ expertise
+                        }}
                     </label>
                 </li>
                 {% endfor %}
             </ul>
         </div>
 
-        <div class="box" id="right-box">
-            <p>Search Expertise?</p>
-        </div>
-        <button type="submit" id="submitBtn">yes</button>
+        <button type="submit" id="submitBtn">Search Expertise</button>
 
     </div>
 </form>

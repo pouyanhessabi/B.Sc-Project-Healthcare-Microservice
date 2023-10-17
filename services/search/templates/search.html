@@ -10,7 +10,7 @@
             background-color: #f0f0f0;
             flex-direction: column;
             align-items: center;
-            margin: 0;
+            margin: 5px;
             font-size: 15px; /* Adjust the font size as needed */
         }
 
@@ -18,9 +18,10 @@
         .object-box {
             border: 10px solid #00C1AA;;
             padding: 50px;
-            margin: 10px;
+            margin: 20px;
             display: inline-block;
             text-align: center;
+            border-radius: 15%;
         }
 
         .field {
@@ -56,7 +57,7 @@
             margin: 10px;
             border-radius: 5px;
             background-color: #f0f0f0;
-            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            /*box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);*/
             font-weight: bold;
             font-size: 30px;
         }
@@ -77,27 +78,20 @@
         {{ expertise }}
     </label>
 </div>
-<!--</header>-->
-{% for doctor in doctors %}
-<div class="object-box">
-    <!--    <div class="field">ID:</div>-->
-    <!--    <div>{{ doctor.id }}</div>-->
-    <div class="field">email:</div>
-    <div>{{ doctor.email }}</div>
-    <!--    <div class="field">password:</div>-->
-    <!--    <div>{{ doctor.password }}</div>-->
-    <div class="field">name:</div>
-    <div>{{ doctor.name }}</div>
-    <div class="field">code:</div>
-    <div>{{ doctor.code }}</div>
-    <div class="field">rate:</div>
-    <div>{{ doctor.rate }}</div>
-    <div class="field">expertises:</div>
-    <div>{{ doctor.expertises }}</div>
-    <div class="field">clinic:</div>
-    <div>{{ doctor.clinic }}</div>
+<div style="width: 100%; flex-wrap: wrap; display: flex; justify-content: center">
+    {% for doctor in doctors %}
+    <div class="object-box">
 
+        <img style="border-radius: 50%" src="../static/{{ doctor.image_src }}" alt="Doctor Photo" width="200"
+             height="200">
+        <p><span class="field">Name: </span>{{ doctor.name }}</p>
+        <p><span class="field">Email: </span>{{ doctor.email }}</p>
+        <p><span class="field">Rate: </span>{{ doctor.rate }}</p>
+        <p><span class="field">Expertise: </span>{{ doctor.expertises }}</p>
+        <p><span class="field">Clinic: </span>{{ doctor.clinic }}</p>
+
+    </div>
+    {% endfor %}
 </div>
-{% endfor %}
 </body>
 </html>
