@@ -20,19 +20,19 @@ The system include four services: 1.User 2. Disease Prediction 3. Expertise Dete
 ## User
 This service includes three main functions: registration, validation and login, user profile, home page. The main implementation of this service has been done with the libraries inside the Flask framework. <br>
 **Run**:
-()[https://github.com/pouyanhessabi/B.Sc-Final-Project-Healthcare-Microservice/blob/main/Report/Gif/User%20Gif.gif]
+(https://github.com/pouyanhessabi/B.Sc-Final-Project-Healthcare-Microservice/blob/main/Report/Gif/User%20Gif.gif)
 ## Disease Prediction
-This service gets patient symptoms and give probable diseases. it has implemented with `XGBoost`, (symptoms-disease dataset)[https://github.com/pouyanhessabi/B.Sc-Final-Project-Healthcare-Microservice/blob/main/services/ai/data/dataset.csv]<br>
+This service gets patient symptoms and give probable diseases. it has implemented with `XGBoost`, [symptoms-disease dataset](https://github.com/pouyanhessabi/B.Sc-Final-Project-Healthcare-Microservice/blob/main/services/ai/data/dataset.csv)<br>
 **Run**:
-()[https://github.com/pouyanhessabi/B.Sc-Final-Project-Healthcare-Microservice/blob/main/Report/Gif/Disease%20and%20Expertise%20Prediction.gif]
+(https://github.com/pouyanhessabi/B.Sc-Final-Project-Healthcare-Microservice/blob/main/Report/Gif/Disease%20and%20Expertise%20Prediction.gif)
 ## Expertise Detection
-This service gets list of diseases and give probable expertise that the patient should visit. it can be seperated in UI. (disease-expertise dataset)[https://github.com/pouyanhessabi/B.Sc-Final-Project-Healthcare-Microservice/blob/main/services/ai/data/average_result.xlsx]<br>
+This service gets list of diseases and give probable expertise that the patient should visit. it can be seperated in UI. [disease-expertise dataset](https://github.com/pouyanhessabi/B.Sc-Final-Project-Healthcare-Microservice/blob/main/services/ai/data/average_result.xlsx)<br>
 **Run**:
-()[https://github.com/pouyanhessabi/B.Sc-Final-Project-Healthcare-Microservice/blob/main/Report/Gif/Disease%20and%20Expertise%20Prediction.gif]
+(https://github.com/pouyanhessabi/B.Sc-Final-Project-Healthcare-Microservice/blob/main/Report/Gif/Disease%20and%20Expertise%20Prediction.gif)
 ## Search Physician
-This service gets an expertise and give the physicians with particular expertise sorted by user rating. we can use this service from both navigation-bar and previous service.
+This service gets an expertise and give the physicians with particular expertise sorted by user rating. we can use this service from both navigation-bar and previous service.<br>
 **Run**:
-()[https://github.com/pouyanhessabi/B.Sc-Final-Project-Healthcare-Microservice/blob/main/Report/Gif/Search.gif]
+(https://github.com/pouyanhessabi/B.Sc-Final-Project-Healthcare-Microservice/blob/main/Report/Gif/Search.gif)
 
 have fun :)
 
