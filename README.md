@@ -18,7 +18,7 @@ In the end, with the tools and evaluation methods and their matching with the sy
 # System Features
 The system include four services: 1.User 2. Disease Prediction 3. Expertise Detection 4. Search Physician. </br>
 **Use-Case Diagram:** </br>
-[](https://github.com/pouyanhessabi/B.Sc-Final-Project-Healthcare-Microservice/blob/main/Report/use-case%20diagram.jpg)
+![Use-Case](https://github.com/pouyanhessabi/B.Sc-Final-Project-Healthcare-Microservice/blob/main/Report/use-case%20diagram.jpg)
 ## User
 This service includes three main functions: registration, validation and login, user profile, home page. The main implementation of this service has been done with the libraries inside the Flask framework. <br>
 **Run**: <br>
