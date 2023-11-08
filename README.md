@@ -9,7 +9,7 @@ In the end, with the tools and evaluation methods and their matching with the sy
 
 # Thesis Table of Content
 **Chapter 1: Introduction** <br>
-**Chapter 2: Review of Previous Works** <br>
+**Chapter 2: Review of Previous Work** <br>
 **Chapter 3: Microservices Architecture** <br>
 **Chapter 4: System Requirements** <br>
 **Chapter 5: Design and Implementation** <br>
